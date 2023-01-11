@@ -4,11 +4,11 @@ import 'city.dart';
 import 'phone.dart';
 
 class Addres {
-  String street;
-  int number;
-  String zipcode;
-  City city;
-  Phone phone;
+  final String street;
+  final int number;
+  final String zipcode;
+  final City city;
+  final Phone phone;
 
   Addres(
       {required this.street,

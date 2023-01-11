@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class Phone {
-  int ddd;
+  final int ddd;
   String phone;
 
   Phone({

@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:indexed_db';
-import 'dart:svg';
+//import 'dart:indexed_db';
+//import 'dart:svg';
 
 import 'address.dart';
 import 'courses.dart';
