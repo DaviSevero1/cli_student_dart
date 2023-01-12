@@ -21,8 +21,8 @@ class City {
 
   factory City.fromMap(Map<String, dynamic> map) {
     return City(
-      id: map['id'],
-      nome: map['nome'],
+      id: map['id'] ?? 0,
+      nome: map['nome'] ?? '',
     );
   }
 

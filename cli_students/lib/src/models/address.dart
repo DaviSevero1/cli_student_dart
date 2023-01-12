@@ -31,9 +31,9 @@ class Addres {
 
   factory Addres.fromMap(Map<String, dynamic> map) {
     return Addres(
-      street: map['street'],
-      number: map['number'],
-      zipcode: map['zipcode'],
+      street: map['street'] ?? '',
+      number: map['number'] ?? 0,
+      zipcode: map['zipcode'] ?? '',
       city: City.fromMap(map['city'] ?? <String, dynamic>{}),
       phone: Phone.fromMap(map['Phone'] ?? <String, dynamic>{}),
     );
