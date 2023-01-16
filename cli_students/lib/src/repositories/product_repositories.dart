@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 import '../models/courses.dart';
 
-class ProductReporitory {
+class ProductRepository {
   Future<Courses> findByName(String name) async {
     final response =
         await http.get(Uri.parse('http://localhost:8080/products?name=$name'));
@@ -15,7 +15,7 @@ class ProductReporitory {
     final responseData = jsonDecode(response.body);
 
     if (responseData.isEmpty) {
-      throw Exception('Produto não encontraqdo');
+      throw Exception('Produto não encontrado');
     }
 
     return Courses.fromMap(responseData.first);
