@@ -4,6 +4,7 @@ import 'package:cli_apoio/src/students/subcomands/find_all_command.dart';
 import '../repositories/student_repository.dart';
 import 'subcomands/find_by_id_command.dart';
 import 'subcomands/insert_command.dart';
+import 'subcomands/update_command.dart';
 
 class StudentsCommand extends Command {
   @override
@@ -19,5 +20,6 @@ class StudentsCommand extends Command {
     addSubcommand(FindAllCommand(studentRepository));
     addSubcommand(FindByIdCommand(studentRepository));
     addSubcommand(InsertCommand(studentRepository));
+    addSubcommand(UpdateCommand(studentRepository));
   }
 }
