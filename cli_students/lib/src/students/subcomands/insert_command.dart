@@ -20,13 +20,14 @@ class InsertCommand extends Command {
   get name => 'insert';
 
   InsertCommand(this.studentRepository) {
-    argParser.addOption('file', help: 'Path of the csv file', abbr: 'f');
+    argParser.addOption('id', help: 'Student ID', abbr: 'i');
   }
 
   @override
   Future<void> run() async {
     final filePath = argResults?['file'];
     final students = File(filePath).readAsLinesSync();
+    print(filePath);
     print('Aguarde');
     print('=====================');
 
@@ -43,7 +44,6 @@ class InsertCommand extends Command {
       }).toList();
 
       final courses = await Future.wait(courseFutures);
-
 
       final studentModel = Students(
         name: studentData[0],

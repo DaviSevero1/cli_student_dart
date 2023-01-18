@@ -1,13 +1,14 @@
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
+import 'package:cli_apoio/src/repositories/student_repository.dart';
 
 import '../../models/address.dart';
 import '../../models/city.dart';
 import '../../models/phone.dart';
 import '../../models/students.dart';
 import '../../repositories/product_repositories.dart';
-import '../../repositories/student_repository.dart';
+//import '../../repositories/student_repository.dart';
 
 class UpdateCommand extends Command {
   StudentRepository studentRepository;
@@ -34,8 +35,7 @@ class UpdateCommand extends Command {
     if (id == null) {
       print('Por favor informe o id do aluno com o comando --id=0 ou -i 0');
     }
-      print(filePath);
-
+    print(filePath);
 
     final students = File(filePath).readAsLinesSync();
     print(students);
@@ -44,6 +44,7 @@ class UpdateCommand extends Command {
     print('===========================');
 
     if (students.length > 1) {
+      print(students.length);
       print('Por favor informe, apenas, um alunos');
       return;
     } else if (students.isEmpty) {

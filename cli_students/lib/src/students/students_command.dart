@@ -1,4 +1,5 @@
 import 'package:args/command_runner.dart';
+import 'package:cli_apoio/src/students/subcomands/delete_student_command.dart';
 import 'package:cli_apoio/src/students/subcomands/find_all_command.dart';
 
 import '../repositories/student_repository.dart';
@@ -21,5 +22,6 @@ class StudentsCommand extends Command {
     addSubcommand(FindByIdCommand(studentRepository));
     addSubcommand(InsertCommand(studentRepository));
     addSubcommand(UpdateCommand(studentRepository));
+    addSubcommand(DeleteById(studentRepository));
   }
 }
