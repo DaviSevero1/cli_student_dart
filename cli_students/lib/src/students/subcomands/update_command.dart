@@ -29,35 +29,57 @@ class UpdateCommand extends Command {
   Future<void> run() async {
     print('Aguarde');
     final filePath = argResults?['file'];
+    final id = argResults?['id'];
+
+    if (id == null) {
+      print('Por favor informe o id do aluno com o comando --id=0 ou -i 0');
+    }
+      print(filePath);
+
+
     final students = File(filePath).readAsLinesSync();
+    print(students);
+
+    print('Aguarde, atualizando dados do aluno...');
     print('===========================');
 
-    for (var student in students) {
-      final studentData = student.split(';');
-      final courseCsv = studentData[2].split(',').map((e) => e.trim()).toList();
-
-      final CourseFutures = courseCsv.map((c) async {
-        final course = await productRepository.findByName(c);
-        course.isStudents = true;
-        return course;
-      }).toList();
-
-      final courses = await Future.wait(CourseFutures);
-
-      final studentModel = Students(
-          name: studentData[0],
-          age: int.tryParse(studentData[1]),
-          nameCourses: courseCsv,
-          courses: courses,
-          addres: Addres(
-              street: studentData[3],
-              number: int.parse(studentData[4]),
-              zipcode: studentData[5],
-              city: City(id: 1, nome: studentData[6]),
-              phone: Phone(
-                  ddd: int.parse(studentData[7]), phone: studentData[8])));
-      await studentRepository.insert(studentModel);
+    if (students.length > 1) {
+      print('Por favor informe, apenas, um alunos');
+      return;
+    } else if (students.isEmpty) {
+      print('Informe um aluno no arguivo $filePath');
+      return;
     }
+
+    var student = students.first;
+
+    final studentData = student.split(';');
+    final courseCsv = studentData[2].split(',').map((e) => e.trim()).toList();
+
+    // ignore: non_constant_identifier_names
+    final CourseFutures = courseCsv.map((c) async {
+      final course = await productRepository.findByName(c);
+      course.isStudents = true;
+      return course;
+    }).toList();
+
+    final courses = await Future.wait(CourseFutures);
+
+    final studentModel = Students(
+        id: int.parse(id),
+        name: studentData[0],
+        age: int.tryParse(studentData[1]),
+        nameCourses: courseCsv,
+        courses: courses,
+        addres: Addres(
+            street: studentData[3],
+            number: int.parse(studentData[4]),
+            zipcode: studentData[5],
+            city: City(id: 1, nome: studentData[6]),
+            phone:
+                Phone(ddd: int.parse(studentData[7]), phone: studentData[8])));
+    await studentRepository.update(studentModel);
+
     print('Alterado com sucesso');
   }
 }
